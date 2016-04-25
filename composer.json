@@ -17,11 +17,11 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bdart/oauth2-server-php": "dev-master",
+        "bdart/oauth2-server-php": "dev-master"
     },
     "autoload": {
         "psr-4": {
-            "filsh\\yii2\\oauth2server\\": ""
+            "bdart\\yii2\\oauth2server\\": ""
         }
     },
     "extra": {
