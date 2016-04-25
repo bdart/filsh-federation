@@ -1,4 +1,4 @@
-<?php
+<?hh
 
 namespace filsh\yii2\oauth2server\filters;
 

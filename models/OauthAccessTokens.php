@@ -1,4 +1,4 @@
-<?php
+<?hh // decl
 
 namespace filsh\yii2\oauth2server\models;
 

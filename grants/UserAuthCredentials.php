@@ -1,4 +1,4 @@
-<?php
+<?hh // decl
 
 namespace filsh\yii2\oauth2server\grants;
 
@@ -8,23 +8,23 @@ use \OAuth2\Storage\UserCredentialsInterface;
 class UserAuthCredentials extends \OAuth2\ClientAssertionType\HttpBasic implements \OAuth2\GrantType\GrantTypeInterface
 {
     protected $userStorage;
-    
+
     public function __construct(UserCredentialsInterface $userStorage, ClientCredentialsInterface $storage, array $config = array())
     {
         $this->userStorage = $userStorage;
         parent::__construct($storage, $config);
     }
-    
+
     public function getQuerystringIdentifier()
     {
         return 'user_authkey_credentials';
     }
-    
+
     public function createAccessToken(\OAuth2\ResponseType\AccessTokenInterface $accessToken, $client_id, $user_id, $scope)
     {
         return $accessToken->createAccessToken($client_id, $user_id, $scope);
     }
-    
+
     public function getUserId()
     {
         return $this->userInfo['user_id'];

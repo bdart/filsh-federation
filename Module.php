@@ -1,4 +1,4 @@
-<?php
+<?hh
 
 namespace filsh\yii2\oauth2server;
 
@@ -6,7 +6,7 @@ use \Yii;
 
 /**
  * For example,
- * 
+ *
  * ```php
  * 'oauth2' => [
  *     'class' => 'filsh\yii2\oauth2server\Module',
@@ -36,23 +36,23 @@ use \Yii;
 class Module extends \yii\base\Module
 {
     public $options = [];
-    
+
     public $storageMap = [];
-    
+
     public $storageDefault = 'filsh\yii2\oauth2server\storage\Pdo';
-    
+
     public $grantTypes = [];
-    
+
     public $modelClasses = [];
-    
+
     public $i18n;
 
     private $_server;
 
     private $_request;
-    
+
     private $_models = [];
-    
+
     /**
      * @inheritdoc
      */
@@ -62,7 +62,7 @@ class Module extends \yii\base\Module
         $this->modelClasses = array_merge($this->getDefaultModelClasses(), $this->modelClasses);
         $this->registerTranslations();
     }
-    
+
     /**
      * Get oauth2 server instance
      * @param type $force
@@ -73,27 +73,27 @@ class Module extends \yii\base\Module
         if($this->_server === null || $force === true) {
             $storages = $this->createStorages();
             $server = new \OAuth2\Server($storages, $this->options);
-            
+
             foreach($this->grantTypes as $name => $options) {
                 if(!isset($storages[$name]) || empty($options['class'])) {
                     throw new \yii\base\InvalidConfigException('Invalid grant types configuration.');
                 }
-                
+
                 $class = $options['class'];
                 unset($options['class']);
-                
+
                 $reflection = new \ReflectionClass($class);
                 $config = array_merge([0 => $storages[$name]], [$options]);
 
                 $instance = $reflection->newInstanceArgs($config);
                 $server->addGrantType($instance);
             }
-            
+
             $this->_server = $server;
         }
         return $this->_server;
     }
-    
+
     /**
      * Get oauth2 request instance from global variables
      * @return \OAuth2\Request
@@ -105,7 +105,7 @@ class Module extends \yii\base\Module
         };
         return $this->_request;
     }
-    
+
     /**
      * Get oauth2 response instance
      * @return \OAuth2\Response
@@ -125,16 +125,17 @@ class Module extends \yii\base\Module
         if(!$connection->getIsActive()) {
             $connection->open();
         }
-        
+
         $storages = [];
         foreach($this->storageMap as $name => $storage) {
             $storages[$name] = Yii::createObject($storage);
         }
-        
+
         $defaults = [
             'access_token',
             'authorization_code',
             'client_credentials',
+            'federation_credentials',
             'client',
             'refresh_token',
             'user_credentials',
@@ -147,10 +148,10 @@ class Module extends \yii\base\Module
                 $storages[$name] = Yii::createObject($this->storageDefault);
             }
         }
-        
+
         return $storages;
     }
-    
+
     /**
      * Get object instance of model
      * @param string $name
@@ -165,7 +166,7 @@ class Module extends \yii\base\Module
         }
         return $this->_models[$name];
     }
-    
+
     /**
      * Register translations for this module
      * @return array

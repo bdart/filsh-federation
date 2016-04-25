@@ -1,4 +1,4 @@
-<?php
+<?hh
 return [
     'A redirect URI must be supplied when multiple redirect URIs are registered' => 'A redirect URI must be supplied when multiple redirect URIs are registered',
     'An unsupported scope was requested' => 'An unsupported scope was requested',
