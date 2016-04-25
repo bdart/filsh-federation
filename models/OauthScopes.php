@@ -1,6 +1,6 @@
 <?hh // decl
 
-namespace filsh\yii2\oauth2server\models;
+namespace bdart\yii2\oauth2server\models;
 
 use Yii;
 

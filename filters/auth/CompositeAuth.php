@@ -1,6 +1,6 @@
 <?hh
 
-namespace filsh\yii2\oauth2server\filters\auth;
+namespace bdart\yii2\oauth2server\filters\auth;
 
 use \Yii;
 

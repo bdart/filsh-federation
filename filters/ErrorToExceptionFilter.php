@@ -1,6 +1,6 @@
 <?hh
 
-namespace filsh\yii2\oauth2server\filters;
+namespace bdart\yii2\oauth2server\filters;
 
 use Yii;
 use yii\base\Controller;
